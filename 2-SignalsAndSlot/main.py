@@ -1,18 +1,20 @@
-#V1 : Plain response
+#V3 : Slider
 
-from PySide6.QtWidgets import QApplication, QPushButton
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import QApplication, QSlider
 
 #The slot (like a controller function)
 
-def button_clicked(data): #Because the clicked signal sends the parameter
-    print("You clicked the button! checked : ", data)
+def respond_to_slider(data): #Because the clicked signal sends the parameter
+    print("Slider moved to : ", data)
 
 app = QApplication()
-button = QPushButton("Push me!")
-button.setCheckable(True) #Checkable button now
+slider = QSlider(Qt.Horizontal)
+slider.setMinimum(1)
+slider.setMaximum(100)
+slider.setValue(25)
 
-button.clicked.connect(button_clicked)
-# Clicked is like a button action, onClick and connect tells what to do after click
+slider.valueChanged.connect(respond_to_slider)
 
-button.show()
+slider.show()
 app.exec()
